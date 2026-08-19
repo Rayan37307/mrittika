@@ -17,37 +17,32 @@ function IconLink({
   href,
   children,
   label,
-  count,
 }: {
   href: string;
   children: React.ReactNode;
   label: string;
-  count?: number;
 }) {
   return (
     <Link
       href={href}
       aria-label={label}
-      className="relative flex items-center justify-center h-9 w-9 text-ink hover:text-terracotta transition-colors"
+      className="flex items-center justify-center h-9 w-9 text-ink hover:text-terracotta transition-colors"
     >
       {children}
-      {typeof count === "number" && count > 0 && (
-        <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-terracotta text-[10px] font-medium text-cream">
-          {count}
-        </span>
-      )}
     </Link>
   );
 }
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const { totalCount } = useCart();
+  const { totalCount, subtotal } = useCart();
 
   return (
     <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b hairline">
-      <div className="container-px flex items-center justify-between gap-4 py-4">
-        <nav className="hidden lg:flex items-center gap-7 text-sm">
+      <div className="container-px flex items-center justify-between gap-4 py-5">
+        <Logo />
+
+        <nav className="hidden lg:flex items-center gap-8 text-sm">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -75,16 +70,10 @@ export default function Header() {
           </svg>
         </button>
 
-        <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-          <Logo />
-        </div>
-
-        <div className="flex items-center gap-1 sm:gap-2">
-          <div className="hidden sm:flex items-center gap-1 pr-2 mr-1 border-r hairline text-sm text-ink-soft">
-            <span className="hover:text-terracotta transition-colors cursor-default">
-              Login / Register
-            </span>
-          </div>
+        <div className="flex items-center gap-1 sm:gap-3">
+          <span className="hidden sm:inline text-sm text-ink-soft mr-1">
+            Login / Register
+          </span>
           <IconLink href="/shop" label="Search products">
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
               <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
@@ -101,21 +90,29 @@ export default function Header() {
               />
             </svg>
           </IconLink>
-          <IconLink
+          <Link
             href="/cart"
-            label={`Cart, ${totalCount} item${totalCount === 1 ? "" : "s"}`}
-            count={totalCount}
+            aria-label={`Cart, ${totalCount} item${totalCount === 1 ? "" : "s"}, subtotal $${subtotal.toFixed(2)}`}
+            className="flex items-center gap-2 rounded-full bg-ink text-cream hover:bg-terracotta transition-colors pl-3.5 pr-4 py-2 ml-1"
           >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
-              <path
-                d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinejoin="round"
-              />
-              <path d="M9 8a3 3 0 0 1 6 0" stroke="currentColor" strokeWidth="1.6" />
-            </svg>
-          </IconLink>
+            <span className="relative">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                <path
+                  d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+                <path d="M9 8a3 3 0 0 1 6 0" stroke="currentColor" strokeWidth="1.6" />
+              </svg>
+              {totalCount > 0 && (
+                <span className="absolute -top-2 -right-2 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-terracotta text-cream text-[9px] font-medium">
+                  {totalCount}
+                </span>
+              )}
+            </span>
+            <span className="text-sm font-medium">${subtotal.toFixed(2)}</span>
+          </Link>
         </div>
       </div>
 

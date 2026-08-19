@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
+import Stars from "./Stars";
 
 const badgeStyles: Record<NonNullable<Product["badge"]>, string> = {
   SALE: "bg-terracotta text-cream",
@@ -25,7 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group">
       <Link href={`/product/${product.id}`} className="block">
-        <div className="relative aspect-square rounded-md overflow-hidden bg-cream-dark">
+        <div className="relative aspect-square rounded-md overflow-hidden border border-ink/10 bg-cream-dark/40">
           <Image
             src={product.image}
             alt={product.name}
@@ -69,14 +70,12 @@ export default function ProductCard({ product }: { product: Product }) {
             )}
           </button>
         </div>
-        <div className="mt-3.5">
-          <p className="text-xs uppercase tracking-wide text-sage-dark">
-            {product.category}
-          </p>
-          <h3 className="mt-1 text-[15px] text-ink group-hover:text-terracotta transition-colors">
+        <div className="mt-4 text-center">
+          <h3 className="text-[15px] text-ink group-hover:text-terracotta transition-colors">
             {product.name}
           </h3>
-          <div className="mt-1.5 flex items-baseline gap-2">
+          <Stars rating={product.rating} className="justify-center my-1.5" />
+          <div className="flex items-baseline justify-center gap-2">
             {product.oldPrice && (
               <span className="text-sm text-ink-soft/60 line-through">
                 ${product.oldPrice.toFixed(2)}
