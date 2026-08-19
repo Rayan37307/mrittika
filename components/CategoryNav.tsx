@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   MugIcon,
   PotIcon,
@@ -20,16 +21,16 @@ export default function CategoryNav() {
       <div className="container-px">
         <div className="grid grid-cols-3 sm:grid-cols-5 divide-x hairline">
           {categories.map(({ label, Icon }) => (
-            <a
+            <Link
               key={label}
-              href="#shop"
+              href={`/shop?category=${encodeURIComponent(label)}`}
               className="group flex items-center justify-center gap-3 py-6 px-3 hover:bg-cream-dark/50 transition-colors"
             >
               <Icon className="h-7 w-7 text-terracotta shrink-0 group-hover:scale-110 transition-transform" />
               <span className="text-sm sm:text-base text-ink-soft group-hover:text-ink">
                 {label}
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

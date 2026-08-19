@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { products } from "@/data/products";
 import ProductCard from "./ProductCard";
 
@@ -14,12 +15,12 @@ export default function PopularProducts() {
               Popular of the Week
             </h2>
           </div>
-          <a
-            href="#shop"
+          <Link
+            href="/shop"
             className="hidden sm:inline text-sm text-ink-soft hover:text-terracotta transition-colors border-b border-transparent hover:border-terracotta pb-0.5"
           >
             View all products
-          </a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10 sm:gap-x-8 sm:gap-y-12">

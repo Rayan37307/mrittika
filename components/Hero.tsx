@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -28,12 +29,12 @@ export default function Hero() {
               on your table.
             </p>
             <div className="flex flex-wrap items-center gap-6">
-              <a
-                href="#shop"
+              <Link
+                href="/shop"
                 className="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide"
               >
                 Shop Now
-              </a>
+              </Link>
               <div className="flex items-center gap-2 text-sm text-cream/90">
                 <span className="text-terracotta-light">★★★★★</span>
                 <span>Rated 4.9/5 based on 374 reviews</span>

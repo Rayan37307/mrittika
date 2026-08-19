@@ -1,13 +1,25 @@
+import Link from "next/link";
 import Logo from "./Logo";
 
 const columns = [
   {
     title: "Explore",
-    links: ["About Me", "Blog", "Pottery Class", "Shipping & Return", "Pottery Care"],
+    links: [
+      { label: "About Me", href: "/#about" },
+      { label: "Blog", href: "/#blog" },
+      { label: "Pottery Class", href: "/#class" },
+      { label: "Shipping & Return", href: "/shop" },
+      { label: "Pottery Care", href: "/shop" },
+    ],
   },
   {
     title: "Follow",
-    links: ["Facebook", "Instagram", "Pinterest", "YouTube"],
+    links: [
+      { label: "Facebook", href: "#" },
+      { label: "Instagram", href: "#" },
+      { label: "Pinterest", href: "#" },
+      { label: "YouTube", href: "#" },
+    ],
   },
 ];
 
@@ -15,7 +27,7 @@ export default function Footer() {
   return (
     <footer className="bg-ink text-cream/80">
       <div className="container-px py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
+        <div id="about">
           <Logo light />
           <p className="mt-4 text-sm leading-relaxed max-w-xs text-cream/60">
             Mrittika — meaning &ldquo;earth&rdquo; — is a small pottery studio
@@ -29,10 +41,10 @@ export default function Footer() {
             <h4 className="font-display text-lg text-cream mb-4">{col.title}</h4>
             <ul className="space-y-2.5 text-sm">
               {col.links.map((link) => (
-                <li key={link}>
-                  <a href="#" className="hover:text-terracotta-light transition-colors">
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  <Link href={link.href} className="hover:text-terracotta-light transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>

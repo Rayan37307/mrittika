@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { Product } from "@/data/products";
+import { useCart } from "@/lib/cart-context";
 
 const badgeStyles: Record<NonNullable<Product["badge"]>, string> = {
   SALE: "bg-terracotta text-cream",
@@ -8,58 +13,81 @@ const badgeStyles: Record<NonNullable<Product["badge"]>, string> = {
 };
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { addItem } = useCart();
+  const [added, setAdded] = useState(false);
+
+  function handleAdd() {
+    addItem(product, 1);
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1600);
+  }
+
   return (
-    <a href="#shop" className="group block">
-      <div className="relative aspect-square rounded-md overflow-hidden bg-cream-dark">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        {product.badge && (
-          <span
-            className={`absolute top-3 left-3 text-[11px] font-medium tracking-wide px-2.5 py-1 rounded-sm ${
-              badgeStyles[product.badge]
-            }`}
-          >
-            {product.badge}
-          </span>
-        )}
-        <button
-          type="button"
-          aria-label={`Add ${product.name} to wishlist`}
-          className="absolute top-3 right-3 h-8 w-8 rounded-full bg-cream/90 flex items-center justify-center text-ink opacity-0 group-hover:opacity-100 transition-opacity"
-        >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-            <path
-              d="M12 20.5s-7.5-4.6-10-9.3C0.6 8 2 4.7 5.3 4c2.2-.5 4.3.6 5.5 2.4l1.2 1.8 1.2-1.8C14.4 4.6 16.5 3.5 18.7 4c3.3.7 4.7 4 3.3 7.2-2.5 4.7-10 9.3-10 9.3Z"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
-      <div className="mt-3.5">
-        <p className="text-xs uppercase tracking-wide text-sage-dark">
-          {product.category}
-        </p>
-        <h3 className="mt-1 text-[15px] text-ink group-hover:text-terracotta transition-colors">
-          {product.name}
-        </h3>
-        <div className="mt-1.5 flex items-baseline gap-2">
-          {product.oldPrice && (
-            <span className="text-sm text-ink-soft/60 line-through">
-              ${product.oldPrice.toFixed(2)}
+    <div className="group">
+      <Link href={`/product/${product.id}`} className="block">
+        <div className="relative aspect-square rounded-md overflow-hidden bg-cream-dark">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          {product.badge && (
+            <span
+              className={`absolute top-3 left-3 text-[11px] font-medium tracking-wide px-2.5 py-1 rounded-sm ${
+                badgeStyles[product.badge]
+              }`}
+            >
+              {product.badge}
             </span>
           )}
-          <span className="text-[15px] font-medium text-terracotta">
-            ${product.price.toFixed(2)}
-          </span>
+          <button
+            type="button"
+            aria-label={added ? `${product.name} added to cart` : `Add ${product.name} to cart`}
+            onClick={(e) => {
+              e.preventDefault();
+              handleAdd();
+            }}
+            className="absolute top-3 right-3 h-8 w-8 rounded-full bg-cream/90 flex items-center justify-center text-ink opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+          >
+            {added ? (
+              <svg viewBox="0 0 24 24" className="h-4 w-4 text-terracotta" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                <path
+                  d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+                <path d="M9 8a3 3 0 0 1 6 0" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M12 11v4M10 13h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            )}
+          </button>
         </div>
-      </div>
-    </a>
+        <div className="mt-3.5">
+          <p className="text-xs uppercase tracking-wide text-sage-dark">
+            {product.category}
+          </p>
+          <h3 className="mt-1 text-[15px] text-ink group-hover:text-terracotta transition-colors">
+            {product.name}
+          </h3>
+          <div className="mt-1.5 flex items-baseline gap-2">
+            {product.oldPrice && (
+              <span className="text-sm text-ink-soft/60 line-through">
+                ${product.oldPrice.toFixed(2)}
+              </span>
+            )}
+            <span className="text-[15px] font-medium text-terracotta">
+              ${product.price.toFixed(2)}
+            </span>
+          </div>
+        </div>
+      </Link>
+    </div>
   );
 }

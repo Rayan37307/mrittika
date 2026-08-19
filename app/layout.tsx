@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Fraunces, Jost } from "next/font/google";
+import { CartProvider } from "@/lib/cart-context";
+import AnnouncementBar from "@/components/AnnouncementBar";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -24,7 +28,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${fraunces.variable} ${jost.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-cream text-ink">{children}</body>
+      <body className="min-h-full flex flex-col bg-cream text-ink">
+        <CartProvider>
+          <AnnouncementBar />
+          <Header />
+          <main className="flex-1 flex flex-col">{children}</main>
+          <Footer />
+        </CartProvider>
+      </body>
     </html>
   );
 }
