@@ -14,7 +14,7 @@ export default function CartPage() {
           <p className="text-xs uppercase tracking-[0.2em] text-terracotta mb-3">
             Your cart
           </p>
-          <h1 className="font-display text-3xl sm:text-4xl text-ink mb-4">
+          <h1 className="font-display text-4xl sm:text-5xl text-ink mb-4">
             Your cart is empty
           </h1>
           <p className="text-ink-soft mb-8">
@@ -42,7 +42,7 @@ export default function CartPage() {
           <span className="text-ink">Cart</span>
         </div>
 
-        <h1 className="font-display text-3xl sm:text-4xl text-ink mb-10">
+        <h1 className="font-display text-4xl sm:text-5xl text-ink mb-10">
           Your Cart
         </h1>
 
@@ -52,7 +52,7 @@ export default function CartPage() {
               <div key={item.id} className="flex gap-4 sm:gap-6 py-6 first:pt-0">
                 <Link
                   href={`/product/${item.id}`}
-                  className="relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 rounded-md overflow-hidden bg-cream-dark"
+                  className="relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 rounded-md overflow-hidden bg-cream"
                 >
                   <Image
                     src={item.image}
@@ -128,7 +128,7 @@ export default function CartPage() {
 
           <div>
             <div className="bg-sage/10 rounded-2xl p-6 sm:p-8">
-              <h2 className="font-display text-xl text-ink mb-5">Order Summary</h2>
+              <h2 className="font-display text-2xl text-ink mb-5">Order Summary</h2>
               <div className="flex items-center justify-between text-sm text-ink-soft mb-2.5">
                 <span>Subtotal</span>
                 <span className="text-ink">${subtotal.toFixed(2)}</span>

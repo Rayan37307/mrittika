@@ -12,7 +12,7 @@ const tiles = [
   {
     label: "Decor",
     category: "Decor",
-    image: "/images/product-candle.jpg",
+    image: "/images/products/triple-candle-holder.jpg",
     alt: "Candle holder and ceramics styled on a table",
   },
 ];
@@ -37,7 +37,7 @@ export default function CategorySplit() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
             <div className="absolute bottom-0 left-0 p-6 sm:p-10 text-cream">
-              <h2 className="font-display text-3xl sm:text-4xl mb-1">
+              <h2 className="font-display text-4xl sm:text-5xl mb-1">
                 {tile.label}
               </h2>
               <p className="text-cream/80 text-sm">

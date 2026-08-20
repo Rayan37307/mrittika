@@ -10,7 +10,7 @@ export default function BlogSection() {
           <p className="text-xs uppercase tracking-[0.2em] text-cream/70 mb-2">
             From the journal
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl text-cream">My Blog</h2>
+          <h2 className="font-display text-4xl sm:text-5xl text-cream">My Blog</h2>
         </div>
 
         <div className="flex flex-col divide-y divide-cream/15">
@@ -55,7 +55,7 @@ export default function BlogSection() {
                     </svg>
                   </span>
                 </div>
-                <h3 className="font-display text-xl sm:text-2xl text-cream mb-2">
+                <h3 className="font-display text-2xl sm:text-3xl text-cream mb-2">
                   {post.title}
                 </h3>
                 <p className="text-sm text-cream/75 leading-relaxed max-w-2xl">

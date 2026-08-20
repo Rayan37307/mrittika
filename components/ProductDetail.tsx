@@ -35,7 +35,7 @@ export default function ProductDetail({ product }: { product: Product }) {
       <p className="text-xs uppercase tracking-wide text-sage-dark mb-2">
         {product.category}
       </p>
-      <h1 className="font-display text-3xl sm:text-4xl text-ink mb-3">
+      <h1 className="font-display text-4xl sm:text-5xl text-ink mb-3">
         {product.name}
       </h1>
 

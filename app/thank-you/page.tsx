@@ -35,7 +35,7 @@ export default async function ThankYouPage({
         <p className="text-xs uppercase tracking-[0.2em] text-terracotta mb-3">
           Order confirmed
         </p>
-        <h1 className="font-display text-3xl sm:text-4xl text-ink mb-4">
+        <h1 className="font-display text-4xl sm:text-5xl text-ink mb-4">
           Thank you — your order is on its way to the kiln shelf.
         </h1>
         <p className="text-ink-soft leading-relaxed mb-8">

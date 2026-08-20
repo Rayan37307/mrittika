@@ -69,14 +69,14 @@ export default function CheckoutPage() {
           <span className="text-ink">Checkout</span>
         </div>
 
-        <h1 className="font-display text-3xl sm:text-4xl text-ink mb-10">
+        <h1 className="font-display text-4xl sm:text-5xl text-ink mb-10">
           Checkout
         </h1>
 
         <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-10 lg:gap-16">
           <div className="lg:col-span-2 flex flex-col gap-10">
             <section>
-              <h2 className="font-display text-xl text-ink mb-4">Contact</h2>
+              <h2 className="font-display text-2xl text-ink mb-4">Contact</h2>
               <Field
                 label="Email address"
                 type="email"
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl text-ink mb-4">
+              <h2 className="font-display text-2xl text-ink mb-4">
                 Shipping Address
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
@@ -106,7 +106,7 @@ export default function CheckoutPage() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl text-ink mb-1.5">Payment</h2>
+              <h2 className="font-display text-2xl text-ink mb-1.5">Payment</h2>
               <p className="text-xs text-ink-soft/70 mb-4">
                 Demo checkout — no real payment is processed or stored.
               </p>
@@ -140,13 +140,13 @@ export default function CheckoutPage() {
 
           <div>
             <div className="bg-sage/10 rounded-2xl p-6 sm:p-8">
-              <h2 className="font-display text-xl text-ink mb-5">
+              <h2 className="font-display text-2xl text-ink mb-5">
                 Order Summary
               </h2>
               <div className="flex flex-col gap-4 mb-6">
                 {items.map((item) => (
                   <div key={item.id} className="flex gap-3">
-                    <div className="relative h-16 w-16 shrink-0 rounded-md overflow-hidden bg-cream-dark">
+                    <div className="relative h-16 w-16 shrink-0 rounded-md overflow-hidden bg-cream">
                       <Image
                         src={item.image}
                         alt={item.name}

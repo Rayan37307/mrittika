@@ -38,7 +38,7 @@ export default function Footer() {
 
         {columns.map((col) => (
           <div key={col.title}>
-            <h4 className="font-display text-lg text-cream mb-4">{col.title}</h4>
+            <h4 className="font-display text-xl text-cream mb-4">{col.title}</h4>
             <ul className="space-y-2.5 text-sm">
               {col.links.map((link) => (
                 <li key={link.label}>
@@ -52,7 +52,7 @@ export default function Footer() {
         ))}
 
         <div>
-          <h4 className="font-display text-lg text-cream mb-4">Contact</h4>
+          <h4 className="font-display text-xl text-cream mb-4">Contact</h4>
           <ul className="space-y-2.5 text-sm text-cream/70">
             <li>hello@mrittika.com</li>
             <li>(212) 820-8293</li>

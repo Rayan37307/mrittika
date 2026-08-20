@@ -40,7 +40,7 @@ export default function FeatureTrio() {
           <div className="absolute inset-0 bg-ink/55" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 text-cream">
             <Icon className="h-9 w-9 mb-4 text-cream" />
-            <h3 className="font-display text-xl mb-2">{title}</h3>
+            <h3 className="font-display text-2xl mb-2">{title}</h3>
             <p className="text-sm text-cream/85 max-w-[220px] leading-relaxed">
               {text}
             </p>

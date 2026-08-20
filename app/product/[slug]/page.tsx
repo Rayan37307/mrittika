@@ -100,11 +100,9 @@ export default async function ProductPage({
 
       <div className="py-10 sm:py-14">
         <div className="container-px">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 mb-16">
+          <div className="grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-16 items-center mb-16">
             <ProductGallery images={product.images} name={product.name} />
-            <div className="flex flex-col justify-center">
-              <ProductDetail product={product} />
-            </div>
+            <ProductDetail product={product} />
           </div>
 
           <div className="mb-20">
@@ -113,7 +111,7 @@ export default async function ProductPage({
 
           {related.length > 0 && (
             <div>
-              <h2 className="font-display text-2xl sm:text-3xl text-ink mb-8">
+              <h2 className="font-display text-3xl sm:text-4xl text-ink mb-8">
                 Related Items
               </h2>
               <RelatedCarousel products={related} />

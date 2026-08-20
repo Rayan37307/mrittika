@@ -13,7 +13,7 @@ export default function PopularProducts() {
             <p className="text-xs uppercase tracking-[0.2em] text-terracotta mb-2">
               The collection
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl text-ink">
+            <h2 className="font-display text-4xl sm:text-5xl text-ink">
               Popular of the Week
             </h2>
           </div>

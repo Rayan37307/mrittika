@@ -11,7 +11,7 @@ export default function Bestsellers() {
           <p className="text-xs uppercase tracking-[0.2em] text-terracotta mb-2">
             Loved again and again
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl text-ink">
+          <h2 className="font-display text-4xl sm:text-5xl text-ink">
             Bestsellers
           </h2>
         </div>

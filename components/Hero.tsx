@@ -12,19 +12,11 @@ export default function Hero() {
   return (
     <section id="home">
       <div className="container-px py-12 lg:py-16">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <div>
-            <p className="uppercase tracking-[0.25em] text-xs sm:text-sm text-terracotta mb-4">
-              Handmade in small batches
-            </p>
-            <h1 className="font-display font-semibold text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.05] text-ink mb-5">
+        <div className="grid lg:grid-cols-4 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-3">
+            <h1 className="font-display font-semibold text-5xl sm:text-6xl lg:text-[5rem] leading-[1.05] text-ink mb-5">
               Discover the pinnacle of craftsmanship.
             </h1>
-            <p className="text-ink-soft text-sm sm:text-base max-w-md mb-8 leading-relaxed">
-              Every piece begins as raw earth — mrittika — shaped by hand,
-              fired slow, and finished with a glaze made to last a lifetime
-              on your table.
-            </p>
             <div className="flex flex-wrap items-center gap-6">
               <Link
                 href="/shop"
@@ -32,20 +24,16 @@ export default function Hero() {
               >
                 Shop Now
               </Link>
-              <div className="flex items-center gap-2 text-sm text-ink-soft">
-                <span className="text-terracotta">★★★★★</span>
-                <span>Rated 4.9/5 based on 374 reviews</span>
-              </div>
             </div>
           </div>
 
-          <div className="relative">
-            <div className="relative aspect-[4/5] sm:aspect-square rounded-md border border-ink/15 bg-cream-dark/40 p-8 sm:p-12">
+          <div className="relative lg:col-span-1">
+            <div className="relative aspect-[4/5] sm:aspect-square rounded-md border border-ink/15 bg-cream p-8 sm:p-12">
               <Image
-                src="/images/product-mug.jpg"
+                src="/images/products/white-glazed-mug.jpg"
                 alt="Featured piece — White Glazed Mug"
                 fill
-                sizes="(min-width: 1024px) 40vw, 90vw"
+                sizes="(min-width: 1024px) 20vw, 90vw"
                 className="object-contain p-4"
                 priority
               />

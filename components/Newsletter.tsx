@@ -15,7 +15,7 @@ export default function Newsletter() {
   return (
     <section className="bg-sage-dark text-cream py-16 sm:py-20">
       <div className="container-px max-w-xl mx-auto text-center">
-        <h2 className="font-display text-3xl sm:text-4xl mb-3">
+        <h2 className="font-display text-4xl sm:text-5xl mb-3">
           Register for The Newsletter
         </h2>
         <p className="text-cream/75 mb-8 leading-relaxed">

@@ -36,7 +36,7 @@ export default function ShopGrid() {
             <p className="text-xs uppercase tracking-[0.2em] text-terracotta mb-2">
               The collection
             </p>
-            <h1 className="font-display text-3xl sm:text-4xl text-ink">
+            <h1 className="font-display text-4xl sm:text-5xl text-ink">
               Shop All Pottery
             </h1>
           </div>

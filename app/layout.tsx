@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Fraunces, Jost } from "next/font/google";
+import { Jost } from "next/font/google";
+import localFont from "next/font/local";
 import { CartProvider } from "@/lib/cart-context";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["300", "400", "500", "600"],
+const heading = localFont({
+  src: "../public/font1.woff2",
+  variable: "--font-heading",
+  weight: "600",
+  style: "normal",
+  display: "swap",
 });
 
 const jost = Jost({
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${jost.variable} h-full antialiased`}>
+    <html lang="en" className={`${heading.variable} ${jost.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-cream text-ink">
         <CartProvider>
           <Header />

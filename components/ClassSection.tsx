@@ -11,7 +11,7 @@ export default function ClassSection() {
     <section id="class" className="pb-16 sm:pb-20">
       <div className="container-px">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center bg-sage/10 rounded-2xl px-6 py-12 sm:px-12 sm:py-14">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.15] text-ink">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.15] text-ink">
             Get to know pottery,
             <br />
             book a class now!
