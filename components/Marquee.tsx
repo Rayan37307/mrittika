@@ -14,7 +14,7 @@ export default function Marquee({ items, tone = "ink" }: MarqueeProps) {
 
   return (
     <div className={`overflow-hidden ${toneStyles[tone]}`}>
-      <div className="marquee-track flex items-center whitespace-nowrap py-3 text-xs sm:text-sm tracking-wide">
+      <div className="marquee-track font-display flex items-center whitespace-nowrap py-3 text-xs sm:text-4xl tracking-wide">
         {track.map((item, i) => (
           <span key={i} className="flex items-center shrink-0">
             <span className="px-6">{item}</span>

@@ -9,16 +9,17 @@ import Stars from "./Stars";
 
 const badgeStyles: Record<NonNullable<Product["badge"]>, string> = {
   SALE: "bg-terracotta text-cream",
-  NEW: "bg-sage text-cream",
+  NEW: "bg-ink text-cream",
   HOT: "bg-ink text-cream",
 };
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
   const [added, setAdded] = useState(false);
 
   function handleAdd() {
     addItem(product, 1);
+    openCart();
     setAdded(true);
     window.setTimeout(() => setAdded(false), 1600);
   }
@@ -26,7 +27,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group">
       <Link href={`/product/${product.id}`} className="block">
-        <div className="relative aspect-square rounded-md overflow-hidden border border-ink/10 bg-cream">
+        <div className="relative aspect-square overflow-hidden bg-cream-dark">
           <Image
             src={product.image}
             alt={product.name}
@@ -34,15 +35,62 @@ export default function ProductCard({ product }: { product: Product }) {
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
+
           {product.badge && (
             <span
-              className={`absolute top-3 left-3 text-[11px] font-medium tracking-wide px-2.5 py-1 rounded-sm ${
+              className={`absolute top-3 left-3 text-[11px] font-bold uppercase tracking-wide px-3 py-1.5 ${
                 badgeStyles[product.badge]
               }`}
             >
               {product.badge}
             </span>
           )}
+
+          <div className="absolute top-3 right-3 flex flex-col gap-1 rounded-md bg-cream p-1 shadow-sm opacity-0 translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+            <button
+              type="button"
+              aria-label="Compare"
+              onClick={(e) => e.preventDefault()}
+              className="h-8 w-8 rounded flex items-center justify-center text-ink hover:bg-terracotta hover:text-cream transition-colors"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                <path
+                  d="M4 8h13m0 0-3-3m3 3-3 3M20 16H7m0 0 3 3m-3-3 3-3"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              aria-label="Quick view"
+              onClick={(e) => e.preventDefault()}
+              className="h-8 w-8 rounded flex items-center justify-center text-ink hover:bg-terracotta hover:text-cream transition-colors"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                <circle cx="11" cy="11" r="6.5" stroke="currentColor" strokeWidth="1.6" />
+                <path d="m20 20-4.3-4.3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              aria-label="Add to wishlist"
+              onClick={(e) => e.preventDefault()}
+              className="h-8 w-8 rounded flex items-center justify-center text-ink hover:bg-terracotta hover:text-cream transition-colors"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                <path
+                  d="M12 20.2s-7.2-4.4-9.4-8.9C1.2 8 2.6 4.7 5.9 4a4.9 4.9 0 0 1 6.1 2.4A4.9 4.9 0 0 1 18.1 4c3.3.7 4.7 4 3.3 7.3-2.2 4.5-9.4 8.9-9.4 8.9Z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
           <button
             type="button"
             aria-label={added ? `${product.name} added to cart` : `Add ${product.name} to cart`}
@@ -50,26 +98,12 @@ export default function ProductCard({ product }: { product: Product }) {
               e.preventDefault();
               handleAdd();
             }}
-            className="absolute top-3 right-3 h-8 w-8 rounded-full bg-cream/90 flex items-center justify-center text-ink opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+            className="absolute inset-x-0 bottom-0 bg-terracotta hover:bg-terracotta-dark text-cream text-[13px] font-medium uppercase tracking-wide py-3 text-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200"
           >
-            {added ? (
-              <svg viewBox="0 0 24 24" className="h-4 w-4 text-terracotta" fill="none">
-                <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-                <path
-                  d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <path d="M9 8a3 3 0 0 1 6 0" stroke="currentColor" strokeWidth="1.6" />
-                <path d="M12 11v4M10 13h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-            )}
+            {added ? "Added ✓" : "Add To Cart"}
           </button>
         </div>
+
         <div className="mt-4 text-center">
           <h3 className="text-[15px] text-ink group-hover:text-terracotta transition-colors">
             {product.name}

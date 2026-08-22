@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { CartProvider } from "@/lib/cart-context";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CartSlider from "@/components/CartSlider";
 import "./globals.css";
 
 const heading = localFont({
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
+          <CartSlider />
         </CartProvider>
       </body>
     </html>

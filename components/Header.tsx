@@ -35,19 +35,19 @@ function IconLink({
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const { totalCount, subtotal } = useCart();
+  const { totalCount, subtotal, openCart } = useCart();
 
   return (
-    <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b hairline">
+    <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-ink">
       <div className="container-px flex items-center justify-between gap-4 py-5">
         <Logo />
 
-        <nav className="hidden lg:flex items-center gap-8 text-sm">
+        <nav className="hidden lg:flex items-center gap-8 text-base font-bold">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-ink-soft hover:text-terracotta transition-colors"
+              className="text-ink hover:text-terracotta transition-colors"
             >
               {link.label}
             </Link>
@@ -71,7 +71,7 @@ export default function Header() {
         </button>
 
         <div className="flex items-center gap-1 sm:gap-3">
-          <span className="hidden sm:inline text-sm text-ink-soft mr-1">
+          <span className="hidden sm:inline text-sm text-ink mr-1">
             Login / Register
           </span>
           <IconLink href="/shop" label="Search products">
@@ -80,7 +80,11 @@ export default function Header() {
               <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           </IconLink>
-          <IconLink href="/shop" label="Wishlist">
+          <Link
+            href="/shop"
+            aria-label="Wishlist, 0 items"
+            className="relative flex items-center justify-center h-9 w-9 text-ink hover:text-terracotta transition-colors"
+          >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
               <path
                 d="M12 20.5s-7.5-4.6-10-9.3C0.6 8 2 4.7 5.3 4c2.2-.5 4.3.6 5.5 2.4l1.2 1.8 1.2-1.8C14.4 4.6 16.5 3.5 18.7 4c3.3.7 4.7 4 3.3 7.2-2.5 4.7-10 9.3-10 9.3Z"
@@ -89,9 +93,13 @@ export default function Header() {
                 strokeLinejoin="round"
               />
             </svg>
-          </IconLink>
-          <Link
-            href="/cart"
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-terracotta text-cream text-[9px] font-bold">
+              0
+            </span>
+          </Link>
+          <button
+            type="button"
+            onClick={openCart}
             aria-label={`Cart, ${totalCount} item${totalCount === 1 ? "" : "s"}, subtotal $${subtotal.toFixed(2)}`}
             className="flex items-center gap-2 rounded-full bg-ink text-cream hover:bg-terracotta transition-colors pl-3.5 pr-4 py-2 ml-1"
           >
@@ -112,18 +120,18 @@ export default function Header() {
               )}
             </span>
             <span className="text-sm font-medium">${subtotal.toFixed(2)}</span>
-          </Link>
+          </button>
         </div>
       </div>
 
       {open && (
-        <nav className="lg:hidden border-t hairline bg-cream">
+        <nav className="lg:hidden border-t border-ink bg-cream">
           <div className="container-px flex flex-col py-3">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="py-2.5 text-sm text-ink-soft hover:text-terracotta transition-colors"
+                className="py-2.5 text-base font-bold text-ink hover:text-terracotta transition-colors"
                 onClick={() => setOpen(false)}
               >
                 {link.label}

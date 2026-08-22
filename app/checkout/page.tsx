@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/lib/cart-context";
+import { FLAT_SHIPPING_RATE, useCart } from "@/lib/cart-context";
 
-const SHIPPING = 8;
+const accent = { accentColor: "var(--color-terracotta)" };
 
 function Field({
   label,
@@ -14,7 +14,10 @@ function Field({
 }: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) {
   return (
     <label className="block">
-      <span className="block text-xs text-ink-soft mb-1.5">{label}</span>
+      <span className="block text-sm text-ink mb-1.5">
+        {label}
+        {props.required && <span className="text-terracotta"> *</span>}
+      </span>
       <input
         {...props}
         className="w-full rounded-md border border-ink/15 bg-cream px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-soft/40 focus:outline-none focus:border-terracotta transition-colors"
@@ -23,13 +26,35 @@ function Field({
   );
 }
 
+const paymentMethods = [
+  {
+    id: "bank" as const,
+    label: "Direct bank transfer",
+    detail:
+      "Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.",
+  },
+  { id: "check" as const, label: "Check payments" },
+  { id: "cod" as const, label: "Cash on delivery" },
+];
+
 export default function CheckoutPage() {
-  const { items, subtotal, hydrated, clearCart } = useCart();
+  const {
+    items,
+    updateQty,
+    removeItem,
+    subtotal,
+    hydrated,
+    clearCart,
+    shippingMethod,
+    setShippingMethod,
+    shippingCost,
+  } = useCart();
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [email, setEmail] = useState("");
+  const [payment, setPayment] = useState<"bank" | "check" | "cod">("bank");
 
-  const total = subtotal + (items.length > 0 ? SHIPPING : 0);
+  const total = subtotal + shippingCost;
 
   useEffect(() => {
     if (hydrated && items.length === 0) {
@@ -73,113 +98,228 @@ export default function CheckoutPage() {
           Checkout
         </h1>
 
-        <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-10 lg:gap-16">
-          <div className="lg:col-span-2 flex flex-col gap-10">
-            <section>
-              <h2 className="font-display text-2xl text-ink mb-4">Contact</h2>
-              <Field
-                label="Email address"
-                type="email"
-                name="email"
-                required
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </section>
-
-            <section>
-              <h2 className="font-display text-2xl text-ink mb-4">
-                Shipping Address
+        <form onSubmit={handleSubmit} className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+          <div className="flex flex-col gap-8">
+            <div>
+              <h2 className="font-display text-2xl text-ink mb-5">
+                Billing details
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
-                <Field label="Full name" name="name" required placeholder="Jordan Lee" />
+                <Field label="First name" name="firstName" required placeholder="Jordan" />
+                <Field label="Last name" name="lastName" required placeholder="Lee" />
                 <Field label="Phone" type="tel" name="phone" required placeholder="(555) 123-4567" />
-                <div className="sm:col-span-2">
-                  <Field label="Address" name="address" required placeholder="123 Clay Street" />
-                </div>
-                <Field label="City" name="city" required placeholder="Brooklyn" />
-                <Field label="State" name="state" required placeholder="NY" />
-                <Field label="ZIP / Postal code" name="zip" required placeholder="11215" />
-                <Field label="Country" name="country" required placeholder="United States" defaultValue="United States" />
-              </div>
-            </section>
+                <Field
+                  label="Email address"
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Field
+                  label="Street address"
+                  name="address"
+                  required
+                  placeholder="House number and street name"
+                />
+                <Field label="Town / City" name="city" required placeholder="Brooklyn" />
 
-            <section>
-              <h2 className="font-display text-2xl text-ink mb-1.5">Payment</h2>
-              <p className="text-xs text-ink-soft/70 mb-4">
-                Demo checkout — no real payment is processed or stored.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="sm:col-span-2">
-                  <Field label="Name on card" name="cardName" required placeholder="Jordan Lee" />
-                </div>
-                <div className="sm:col-span-2">
-                  <Field
-                    label="Card number"
-                    name="cardNumber"
+                <label className="block">
+                  <span className="block text-sm text-ink mb-1.5">
+                    Country / Region<span className="text-terracotta"> *</span>
+                  </span>
+                  <select
+                    name="country"
                     required
-                    inputMode="numeric"
-                    placeholder="4242 4242 4242 4242"
-                    maxLength={19}
-                  />
-                </div>
-                <Field label="Expiry (MM/YY)" name="expiry" required placeholder="08/29" maxLength={5} />
-                <Field label="CVC" name="cvc" required inputMode="numeric" placeholder="123" maxLength={4} />
-              </div>
-            </section>
+                    defaultValue="United States (US)"
+                    className="w-full rounded-md border border-ink/15 bg-cream px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:border-terracotta transition-colors"
+                  >
+                    <option>United States (US)</option>
+                    <option>Canada</option>
+                    <option>United Kingdom</option>
+                    <option>Australia</option>
+                  </select>
+                </label>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark disabled:opacity-60 transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide w-fit"
-            >
-              {submitting ? "Placing order…" : `Place Order — $${total.toFixed(2)}`}
-            </button>
+                <Field label="ZIP Code" name="zip" required placeholder="11215" />
+              </div>
+
+              <label className="flex items-center gap-2.5 text-sm font-medium text-ink mt-5 cursor-pointer">
+                <input type="checkbox" name="createAccount" style={accent} />
+                Create an account?
+              </label>
+            </div>
+
+            <div>
+              <h2 className="font-display text-2xl text-ink mb-4">
+                Additional information
+              </h2>
+              <label className="flex items-center gap-2.5 text-sm font-medium text-ink mb-5 cursor-pointer">
+                <input type="checkbox" name="shipDifferent" style={accent} />
+                Ship to a different address?
+              </label>
+
+              <label className="block">
+                <span className="block text-sm text-ink mb-1.5">
+                  Order notes{" "}
+                  <span className="text-ink-soft/50">(optional)</span>
+                </span>
+                <textarea
+                  name="notes"
+                  rows={4}
+                  placeholder="Notes about your order, e.g. special notes for delivery."
+                  className="w-full rounded-md border border-ink/15 bg-cream px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-soft/40 focus:outline-none focus:border-terracotta transition-colors resize-y"
+                />
+              </label>
+            </div>
           </div>
 
           <div>
-            <div className="bg-sage/10 rounded-2xl p-6 sm:p-8">
+            <div className="border border-ink/15 rounded-2xl p-6 sm:p-8">
               <h2 className="font-display text-2xl text-ink mb-5">
-                Order Summary
+                Your order
               </h2>
-              <div className="flex flex-col gap-4 mb-6">
+
+              <div className="flex items-center justify-between text-xs uppercase tracking-wide text-ink-soft/70 pb-3 border-b border-ink/10">
+                <span>Product</span>
+                <span>Subtotal</span>
+              </div>
+
+              <div className="divide-y divide-ink/10">
                 {items.map((item) => (
-                  <div key={item.id} className="flex gap-3">
-                    <div className="relative h-16 w-16 shrink-0 rounded-md overflow-hidden bg-cream">
+                  <div key={item.id} className="flex items-center gap-3 py-4">
+                    <button
+                      type="button"
+                      aria-label={`Remove ${item.name} from cart`}
+                      onClick={() => removeItem(item.id)}
+                      className="flex h-4 w-4 shrink-0 items-center justify-center text-ink-soft/60 hover:text-terracotta transition-colors"
+                    >
+                      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none">
+                        <path
+                          d="M6 6l12 12M18 6L6 18"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </button>
+
+                    <div className="relative h-11 w-11 shrink-0 overflow-hidden bg-cream-dark">
                       <Image
                         src={item.image}
                         alt={item.name}
                         fill
-                        sizes="64px"
+                        sizes="44px"
                         className="object-cover"
                       />
-                      <span className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-ink text-cream text-[11px] flex items-center justify-center">
-                        {item.qty}
-                      </span>
                     </div>
-                    <div className="flex-1 flex items-center justify-between gap-2">
-                      <p className="text-sm text-ink leading-tight">{item.name}</p>
-                      <p className="text-sm text-ink-soft shrink-0">
-                        ${(item.price * item.qty).toFixed(2)}
-                      </p>
+
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm text-ink">{item.name}</p>
+                      <div className="mt-1 flex items-center border border-ink/15 rounded-full w-fit">
+                        <button
+                          type="button"
+                          aria-label={`Decrease quantity of ${item.name}`}
+                          onClick={() => updateQty(item.id, item.qty - 1)}
+                          className="h-6 w-6 flex items-center justify-center text-ink-soft hover:text-terracotta transition-colors text-xs"
+                        >
+                          −
+                        </button>
+                        <span className="w-5 text-center text-xs">{item.qty}</span>
+                        <button
+                          type="button"
+                          aria-label={`Increase quantity of ${item.name}`}
+                          onClick={() => updateQty(item.id, item.qty + 1)}
+                          className="h-6 w-6 flex items-center justify-center text-ink-soft hover:text-terracotta transition-colors text-xs"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
+
+                    <span className="shrink-0 text-sm text-ink-soft">
+                      ${(item.price * item.qty).toFixed(2)}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-center justify-between text-sm text-ink-soft mb-2.5">
-                <span>Subtotal</span>
-                <span className="text-ink">${subtotal.toFixed(2)}</span>
+              <div className="flex items-center justify-between text-sm py-4 border-b border-ink/10">
+                <span className="text-ink">Subtotal</span>
+                <span className="text-terracotta font-medium">
+                  ${subtotal.toFixed(2)}
+                </span>
               </div>
-              <div className="flex items-center justify-between text-sm text-ink-soft mb-5">
-                <span>Shipping</span>
-                <span className="text-ink">${SHIPPING.toFixed(2)}</span>
+
+              <div className="flex items-start justify-between text-sm py-4 border-b border-ink/10">
+                <span className="text-ink">Shipment</span>
+                <div className="flex flex-col items-end gap-1.5 text-ink-soft">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    Free shipping
+                    <input
+                      type="radio"
+                      name="shipment"
+                      checked={shippingMethod === "free"}
+                      onChange={() => setShippingMethod("free")}
+                      style={accent}
+                    />
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    Flat rate:{" "}
+                    <span className="text-terracotta font-medium">
+                      ${FLAT_SHIPPING_RATE.toFixed(2)}
+                    </span>
+                    <input
+                      type="radio"
+                      name="shipment"
+                      checked={shippingMethod === "flat"}
+                      onChange={() => setShippingMethod("flat")}
+                      style={accent}
+                    />
+                  </label>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-base font-medium text-ink border-t hairline pt-4">
+
+              <div className="flex items-center justify-between text-base font-medium text-ink py-4 border-b border-ink/10">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span className="text-terracotta text-lg">
+                  ${total.toFixed(2)}
+                </span>
               </div>
+
+              <h2 className="font-display text-2xl text-ink mt-6 mb-4">
+                Payment information
+              </h2>
+              <div className="flex flex-col gap-3">
+                {paymentMethods.map((method) => (
+                  <div key={method.id}>
+                    <label className="flex items-center gap-2.5 text-sm font-medium text-ink cursor-pointer">
+                      <input
+                        type="radio"
+                        name="payment"
+                        checked={payment === method.id}
+                        onChange={() => setPayment(method.id)}
+                        style={accent}
+                      />
+                      {method.label}
+                    </label>
+                    {method.detail && payment === method.id && (
+                      <p className="mt-2.5 rounded-md bg-sage/10 p-4 text-xs leading-relaxed text-ink-soft">
+                        {method.detail}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="mt-7 w-full inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark disabled:opacity-60 transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide"
+              >
+                {submitting ? "Placing order…" : "Place Order"}
+              </button>
             </div>
           </div>
         </form>

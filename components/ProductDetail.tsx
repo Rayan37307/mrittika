@@ -7,7 +7,7 @@ import { useCart } from "@/lib/cart-context";
 import Stars from "./Stars";
 
 export default function ProductDetail({ product }: { product: Product }) {
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
   const router = useRouter();
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
@@ -15,6 +15,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 
   function handleAddToCart() {
     addItem(product, qty);
+    openCart();
     setAdded(true);
     window.setTimeout(() => setAdded(false), 2000);
   }

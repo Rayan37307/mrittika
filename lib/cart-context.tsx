@@ -19,6 +19,9 @@ export type CartItem = {
   qty: number;
 };
 
+export type ShippingMethod = "free" | "flat";
+export const FLAT_SHIPPING_RATE = 8;
+
 type CartContextValue = {
   items: CartItem[];
   addItem: (product: Product, qty?: number) => void;
@@ -28,6 +31,12 @@ type CartContextValue = {
   subtotal: number;
   totalCount: number;
   hydrated: boolean;
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+  shippingMethod: ShippingMethod;
+  setShippingMethod: (method: ShippingMethod) => void;
+  shippingCost: number;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -36,6 +45,10 @@ const STORAGE_KEY = "mrittika-cart";
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const openCart = useCallback(() => setIsCartOpen(true), []);
+  const closeCart = useCallback(() => setIsCartOpen(false), []);
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>("free");
 
   // Load persisted cart on mount. This one-time hydration from localStorage
   // (an external system) intentionally runs after mount to avoid an SSR/CSR markup mismatch.
@@ -100,6 +113,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     () => items.reduce((sum, i) => sum + i.qty, 0),
     [items]
   );
+  const shippingCost = shippingMethod === "flat" ? FLAT_SHIPPING_RATE : 0;
 
   const value = useMemo(
     () => ({
@@ -111,8 +125,28 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       subtotal,
       totalCount,
       hydrated,
+      isCartOpen,
+      openCart,
+      closeCart,
+      shippingMethod,
+      setShippingMethod,
+      shippingCost,
     }),
-    [items, addItem, removeItem, updateQty, clearCart, subtotal, totalCount, hydrated]
+    [
+      items,
+      addItem,
+      removeItem,
+      updateQty,
+      clearCart,
+      subtotal,
+      totalCount,
+      hydrated,
+      isCartOpen,
+      openCart,
+      closeCart,
+      shippingMethod,
+      shippingCost,
+    ]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
