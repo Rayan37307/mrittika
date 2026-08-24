@@ -20,7 +20,7 @@ export default function Hero() {
             <div className="flex flex-wrap items-center gap-6">
               <Link
                 href="/shop"
-                className="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-8 py-3.5 text-sm font-bold tracking-wide"
+                className="inline-flex items-center justify-center rounded-full bg-sage hover:bg-sage-dark transition-colors text-cream px-8 py-3.5 text-sm font-bold tracking-wide"
               >
                 Shop Now
               </Link>
@@ -29,8 +29,8 @@ export default function Hero() {
 
           <div className="relative lg:col-span-2 aspect-square border border-ink p-1.5">
             <Image
-              src="/images/products/white-glazed-mug.jpg"
-              alt="Featured piece — White Glazed Mug"
+              src="/ChatGPT%20Image%20Aug%2022%2C%202026%2C%2010_28_13%20PM%20(1).png"
+              alt="A curated collection of handcrafted pottery — plate, bowl, terracotta pot, and candle holder"
               fill
               sizes="(min-width: 1024px) 40vw, 90vw"
               className="object-contain"

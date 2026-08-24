@@ -123,7 +123,7 @@ export default function CartSlider() {
               <Link
                 href="/checkout"
                 onClick={closeCart}
-                className="flex items-center justify-center rounded-full bg-terracotta py-3.5 text-sm font-semibold tracking-wide text-cream transition-colors hover:bg-terracotta-dark"
+                className="flex items-center justify-center rounded-full bg-sage py-3.5 text-sm font-semibold tracking-wide text-cream transition-colors hover:bg-sage-dark"
               >
                 Checkout
               </Link>

@@ -44,7 +44,7 @@ export default function CartPage() {
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide"
+            className="inline-flex items-center justify-center rounded-full bg-sage hover:bg-sage-dark transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide"
           >
             Continue Shopping
           </Link>
@@ -212,7 +212,7 @@ export default function CartPage() {
                 />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-6 py-2.5 text-sm font-medium tracking-wide"
+                  className="inline-flex items-center justify-center rounded-full bg-sage hover:bg-sage-dark transition-colors text-cream px-6 py-2.5 text-sm font-medium tracking-wide"
                 >
                   Apply Coupon
                 </button>
@@ -275,7 +275,7 @@ export default function CartPage() {
 
                 <Link
                   href="/checkout"
-                  className="w-full inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-6 py-3.5 text-sm font-medium tracking-wide"
+                  className="w-full inline-flex items-center justify-center rounded-full bg-sage hover:bg-sage-dark transition-colors text-cream px-6 py-3.5 text-sm font-medium tracking-wide"
                 >
                   Proceed to Checkout
                 </Link>

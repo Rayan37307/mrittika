@@ -47,7 +47,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-ink hover:text-terracotta transition-colors"
+              className="text-sage hover:text-terracotta transition-colors"
             >
               {link.label}
             </Link>
@@ -131,7 +131,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="py-2.5 text-base font-bold text-ink hover:text-terracotta transition-colors"
+                className="py-2.5 text-base font-bold text-sage hover:text-terracotta transition-colors"
                 onClick={() => setOpen(false)}
               >
                 {link.label}

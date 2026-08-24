@@ -66,7 +66,7 @@ export default async function ThankYouPage({
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/shop"
-            className="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide"
+            className="inline-flex items-center justify-center rounded-full bg-sage hover:bg-sage-dark transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide"
           >
             Continue Shopping
           </Link>

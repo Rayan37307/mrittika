@@ -13,7 +13,7 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="bg-sage-dark text-cream py-16 sm:py-20">
+    <section id="newsletter" className="bg-sage-dark text-cream py-16 sm:py-20">
       <div className="container-px max-w-xl mx-auto text-center">
         <h2 className="font-display text-4xl sm:text-5xl mb-3">
           Register for The Newsletter
@@ -46,7 +46,7 @@ export default function Newsletter() {
             />
             <button
               type="submit"
-              className="w-full sm:w-auto shrink-0 rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-7 py-3 text-sm font-medium tracking-wide"
+              className="w-full sm:w-auto shrink-0 rounded-full bg-sage hover:bg-sage-dark transition-colors text-cream px-7 py-3 text-sm font-medium tracking-wide"
             >
               Sign Up
             </button>

@@ -39,6 +39,14 @@ h1, h2, h3, h4,
   font-family: var(--font-heading), "Arial Narrow", Arial, sans-serif;
 }
 
+h1:not(#blog *):not(#newsletter *),
+h2:not(#blog *):not(#newsletter *),
+h3:not(#blog *):not(#newsletter *),
+h4:not(#blog *):not(#newsletter *),
+.font-display:not(#blog *):not(#newsletter *) {
+  color: var(--color-sage);
+}
+
 .container-px {
   padding-left: 1.25rem;
   padding-right: 1.25rem;

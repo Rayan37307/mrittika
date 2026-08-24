@@ -316,7 +316,7 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-7 w-full inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark disabled:opacity-60 transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide"
+                className="mt-7 w-full inline-flex items-center justify-center rounded-full bg-sage hover:bg-sage-dark disabled:opacity-60 transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide"
               >
                 {submitting ? "Placing order…" : "Place Order"}
               </button>

@@ -98,7 +98,7 @@ export default function ProductCard({ product }: { product: Product }) {
               e.preventDefault();
               handleAdd();
             }}
-            className="absolute inset-x-0 bottom-0 bg-terracotta hover:bg-terracotta-dark text-cream text-[13px] font-medium uppercase tracking-wide py-3 text-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200"
+            className="absolute inset-x-0 bottom-0 bg-sage hover:bg-sage-dark text-cream text-[13px] font-medium uppercase tracking-wide py-3 text-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200"
           >
             {added ? "Added ✓" : "Add To Cart"}
           </button>

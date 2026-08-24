@@ -33,7 +33,7 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
         type="button"
         aria-label="Previous products"
         onClick={() => scrollBy(-1)}
-        className="hidden sm:flex absolute -left-5 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full bg-terracotta text-cream hover:bg-terracotta-dark transition-colors shadow-md z-10"
+        className="hidden sm:flex absolute -left-5 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full bg-sage text-cream hover:bg-sage-dark transition-colors shadow-md z-10"
       >
         <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
           <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -43,7 +43,7 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
         type="button"
         aria-label="Next products"
         onClick={() => scrollBy(1)}
-        className="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full bg-terracotta text-cream hover:bg-terracotta-dark transition-colors shadow-md z-10"
+        className="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full bg-sage text-cream hover:bg-sage-dark transition-colors shadow-md z-10"
       >
         <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
           <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

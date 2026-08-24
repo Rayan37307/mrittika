@@ -19,7 +19,7 @@ export default function PopularProducts() {
           </div>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-6 py-3 text-sm font-medium tracking-wide"
+            className="inline-flex items-center gap-2 rounded-full bg-sage hover:bg-sage-dark transition-colors text-cream px-6 py-3 text-sm font-medium tracking-wide"
           >
             View all products
             <span aria-hidden="true">→</span>

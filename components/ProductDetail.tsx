@@ -91,7 +91,7 @@ export default function ProductDetail({ product }: { product: Product }) {
         <button
           type="button"
           onClick={handleAddToCart}
-          className="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide min-w-[160px]"
+          className="inline-flex items-center justify-center rounded-full bg-sage hover:bg-sage-dark transition-colors text-cream px-8 py-3.5 text-sm font-medium tracking-wide min-w-[160px]"
         >
           {added ? "Added to cart ✓" : "Add to Cart"}
         </button>
