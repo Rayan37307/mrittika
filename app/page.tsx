@@ -22,7 +22,7 @@ export default function Home() {
       <FeatureTrio />
       <Marquee items={tickerItems} tone="sage" />
       <Bestsellers />
-      <BlogSection />
+      {/* <BlogSection /> */}
       <Newsletter />
     </>
   );
