@@ -27,7 +27,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="relative lg:col-span-2 aspect-square border border-ink p-1.5">
+          <div className="relative lg:col-span-2 aspect-square p-1.5">
             <Image
               src="/ChatGPT%20Image%20Aug%2022%2C%202026%2C%2010_28_13%20PM%20(1).png"
               alt="A curated collection of handcrafted pottery — plate, bowl, terracotta pot, and candle holder"

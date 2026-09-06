@@ -36,11 +36,11 @@ export default function CategorySplit() {
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-6 sm:p-10 text-cream">
-              <h2 className="font-display text-4xl sm:text-5xl mb-1">
+            <div className="absolute bottom-0 left-0 p-6 sm:p-10 text-white">
+              <h2 className="font-display !text-white text-4xl sm:text-5xl mb-1">
                 {tile.label}
               </h2>
-              <p className="text-cream/80 text-sm">
+              <p className="text-white/80 text-sm">
                 {count} {count === 1 ? "piece" : "pieces"}
               </p>
             </div>

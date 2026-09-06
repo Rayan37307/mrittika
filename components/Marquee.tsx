@@ -4,8 +4,8 @@ type MarqueeProps = {
 };
 
 const toneStyles: Record<NonNullable<MarqueeProps["tone"]>, string> = {
-  ink: "bg-ink text-cream",
-  sage: "bg-sage text-cream",
+  ink: "bg-ink !text-white",
+  sage: "bg-sage !text-white",
   cream: "bg-cream-dark text-ink",
 };
 
