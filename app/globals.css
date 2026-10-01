@@ -39,12 +39,19 @@ h1, h2, h3, h4,
   font-family: var(--font-heading), "Arial Narrow", Arial, sans-serif;
 }
 
-h1:not(#blog *):not(#newsletter *),
-h2:not(#blog *):not(#newsletter *),
-h3:not(#blog *):not(#newsletter *),
-h4:not(#blog *):not(#newsletter *),
-.font-display:not(#blog *):not(#newsletter *) {
-  color: var(--color-sage);
+@layer base {
+  h1:not(#blog *):not(#newsletter *):not(.marquee-track):not(.marquee-track *),
+  h2:not(#blog *):not(#newsletter *):not(.marquee-track):not(.marquee-track *),
+  h3:not(#blog *):not(#newsletter *):not(.marquee-track):not(.marquee-track *),
+  h4:not(#blog *):not(#newsletter *):not(.marquee-track):not(.marquee-track *),
+  .font-display:not(#blog *):not(#newsletter *):not(.marquee-track):not(.marquee-track *) {
+    color: var(--color-sage);
+  }
+}
+
+.marquee-track,
+.marquee-track span {
+  color: inherit;
 }
 
 .container-px {

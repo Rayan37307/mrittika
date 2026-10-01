@@ -4,8 +4,8 @@ type MarqueeProps = {
 };
 
 const toneStyles: Record<NonNullable<MarqueeProps["tone"]>, string> = {
-  ink: "bg-ink !text-white",
-  sage: "bg-sage !text-white",
+  ink: "bg-ink text-white",
+  sage: "bg-sage text-white",
   cream: "bg-cream-dark text-ink",
 };
 
@@ -18,7 +18,7 @@ export default function Marquee({ items, tone = "ink" }: MarqueeProps) {
         {track.map((item, i) => (
           <span key={i} className="flex items-center shrink-0">
             <span className="px-6">{item}</span>
-            <span aria-hidden="true" className="text-terracotta-light">
+            <span aria-hidden="true" className="text-white/80">
               +
             </span>
           </span>
